@@ -1,3 +1,18 @@
+const gameStateVar: GameState = {
+	homeScore: 0,
+	awayScore: 0,
+	inning: {
+		number: 1,
+		half: "top"
+	},
+	count: {
+		balls: 0,
+		strikes: 0
+	},
+	basesLoaded: [],
+	outs: 0
+};
+
 function createBc(name: string) {
 	const bc = new BroadcastChannel(name);
 	window.onunload = () => {
@@ -18,5 +33,9 @@ export function getSettings(): Settings {
 }
 
 export function getGameState(): GameState {
+	if (!localStorage.getItem("gameState")) {
+		localStorage.setItem("gameState", JSON.stringify(gameStateVar));
+		return gameStateVar;
+	}
 	return JSON.parse(localStorage.getItem("gameState")!);
 }

@@ -1,30 +1,14 @@
 <script lang="ts" setup>
 import { onBeforeMount, ref } from "vue";
 
+const defaultSettings = {
+	homeTeam: "hom",
+	awayTeam: "awy"
+};
+
 onBeforeMount(() => {
-	const defaultSettings = {
-		homeTeam: "hom",
-		awayTeam: "awy"
-	};
-	const gameState = {
-		homeScore: 0,
-		awayScore: 0,
-		inning: {
-			number: 1,
-			half: "top"
-		},
-		count: {
-			balls: 0,
-			strikes: 0
-		},
-		basesLoaded: [],
-		outs: 0
-	};
 	if (!localStorage.getItem("settings")) {
 		localStorage.setItem("settings", JSON.stringify(defaultSettings));
-	}
-	if (!localStorage.getItem("gameState")) {
-		localStorage.setItem("gameState", JSON.stringify(gameState));
 	}
 });
 
